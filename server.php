@@ -1,17 +1,12 @@
 <?php
-
-/*
- * This file is part of Chevere.
- *
- * (c) Rodolfo Berrios <rodolfo@chevere.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+/**
+ * This file is part of Swow-Cloud/Job
+ * @license  https://github.com/serendipity-swow/serendipity-job/blob/master/LICENSE
  */
 
 declare(strict_types=1);
 
-foreach (['/', '/../../../'] as $path) {
+foreach (['/', '/../../../','/../'] as $path) {
     $autoload = __DIR__ . $path . 'vendor/autoload.php';
     if (stream_resolve_include_path($autoload)) {
         require $autoload;
@@ -22,11 +17,8 @@ foreach (['/', '/../../../'] as $path) {
 
 use Chevere\ThrowableHandler\Documents\ThrowableHandlerConsoleDocument;
 use Chevere\ThrowableHandler\ThrowableHandler;
-use function Chevere\ThrowableHandler\throwableHandler;
-use function Chevere\Writer\streamFor;
 use Chevere\Writer\StreamWriter;
 use Chevere\Writer\Writers;
-use function Chevere\Writer\writers;
 use Chevere\Writer\WritersInstance;
 use Clue\React\Sse\BufferedChannel;
 use Psr\Http\Message\ServerRequestInterface;
@@ -39,6 +31,9 @@ use React\Http\Middleware\RequestBodyParserMiddleware;
 use React\Http\Middleware\StreamingRequestMiddleware;
 use React\Stream\ThroughStream;
 use samejack\PHP\ArgvParser;
+use function Chevere\ThrowableHandler\throwableHandler;
+use function Chevere\Writer\streamFor;
+use function Chevere\Writer\writers;
 
 new WritersInstance(
     (new Writers())
@@ -60,7 +55,7 @@ set_exception_handler(function (Throwable $e) {
     $docInternal = new ThrowableHandlerConsoleDocument($handler);
     writers()->error()
         ->write($docInternal->__toString() . "\n");
-    die(255);
+    exit(255);
 });
 
 $loop = Loop::get();
@@ -140,8 +135,8 @@ $handler = function (ServerRequestInterface $request) use ($channel, $loop) {
                         'topic' => $topic,
                     ])
                 );
-                
-                echo "* [$address] $fileDisplay\n";
+
+                echo "* [{$address}] {$fileDisplay}\n";
             }
 
             return new Response(
@@ -183,19 +178,19 @@ $http = new HttpServer(
 $options = (new ArgvParser())->parseConfigs();
 if (array_key_exists('h', $options) || array_key_exists('help', $options)) {
     echo implode("\n", ['-p Port (default 27420)', '-c Cert .pem file', '']);
-    die(0);
+    exit(0);
 }
 $host = '0.0.0.0';
 $port = $options['p'] ?? '0';
 $cert = $options['c'] ?? null;
 $scheme = isset($cert) ? 'tls' : 'tcp';
-$uri = "$scheme://$host:$port";
+$uri = "{$scheme}://{$host}:{$port}";
 $context = $scheme === 'tcp'
     ? []
     : [
         'tls' => [
-            'local_cert' => $cert
-        ]
+            'local_cert' => $cert,
+        ],
     ];
 $socket = new \React\Socket\SocketServer(
     uri: $uri,
@@ -206,5 +201,5 @@ $http->listen($socket);
 $socket->on('error', 'printf');
 $scheme = parse_url($socket->getAddress(), PHP_URL_SCHEME);
 $httpAddress = strtr($socket->getAddress(), ['tls:' => 'https:', 'tcp:' => 'http:']);
-echo "Chevere XR debugger listening on ($scheme) $httpAddress" . PHP_EOL;
+echo "Chevere XR debugger listening on ({$scheme}) {$httpAddress}" . PHP_EOL;
 $loop->run();

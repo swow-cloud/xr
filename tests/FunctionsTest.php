@@ -1,24 +1,23 @@
 <?php
-
-/*
- * This file is part of Chevere.
- *
- * (c) Rodolfo Berrios <rodolfo@chevere.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+/**
+ * This file is part of Swow-Cloud/Job
+ * @license  https://github.com/serendipity-swow/serendipity-job/blob/master/LICENSE
  */
 
 declare(strict_types=1);
 
 namespace Chevere\Xr\Tests\Chevere\Xr;
 
-use function Chevere\Writer\streamTemp;
 use Chevere\Writer\StreamWriter;
-use function Chevere\Xr\getWriter;
 use Chevere\Xr\WriterInstance;
 use PHPUnit\Framework\TestCase;
+use function Chevere\Writer\streamTemp;
+use function Chevere\Xr\getWriter;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 final class FunctionsTest extends TestCase
 {
     public function testXr(): void

@@ -1,24 +1,23 @@
 <?php
-
-/*
- * This file is part of Chevere.
- *
- * (c) Rodolfo Berrios <rodolfo@chevere.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+/**
+ * This file is part of Swow-Cloud/Job
+ * @license  https://github.com/serendipity-swow/serendipity-job/blob/master/LICENSE
  */
 
 declare(strict_types=1);
 
 namespace Chevere\Xr\Tests\Chevere\Xr;
 
-use function Chevere\Message\message;
 use Chevere\Throwable\Errors\TypeError;
 use Chevere\Xr\ThrowableParser;
 use Exception;
 use PHPUnit\Framework\TestCase;
+use function Chevere\Message\message;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 final class ThrowableParserTest extends TestCase
 {
     public function testTopLevel(): void
@@ -33,7 +32,7 @@ final class ThrowableParserTest extends TestCase
         $this->assertSame('⚠️Throwable', $parser->emote());
         $this->assertStringContainsString(Exception::class, $parser->body());
     }
-    
+
     public function testNamespaced(): void
     {
         $throwable = new TypeError(message: message('foo'));

@@ -1,27 +1,22 @@
 <?php
-
-/*
- * This file is part of Chevere.
- *
- * (c) Rodolfo Berrios <rodolfo@chevere.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+/**
+ * This file is part of Swow-Cloud/Job
+ * @license  https://github.com/serendipity-swow/serendipity-job/blob/master/LICENSE
  */
 
 declare(strict_types=1);
 
-use function Chevere\Message\message;
 use Chevere\Throwable\Exceptions\RuntimeException;
+use function Chevere\Message\message;
 
 throw new RuntimeException(
-    message: message("Ch bah puta la güeá"),
+    message: message('Ch bah puta la güeá'),
     code: 12345,
     previous: new Exception(
-        message: "A la chuchesumare",
+        message: 'A la chuchesumare',
         code: 678,
         previous: new LogicException(
-            message: "Ese conchesumare",
+            message: 'Ese conchesumare',
             code: 0,
         )
     )

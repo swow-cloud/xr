@@ -1,12 +1,7 @@
 <?php
-
-/*
- * This file is part of Chevere.
- *
- * (c) Rodolfo Berrios <rodolfo@chevere.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+/**
+ * This file is part of Swow-Cloud/Job
+ * @license  https://github.com/serendipity-swow/serendipity-job/blob/master/LICENSE
  */
 
 declare(strict_types=1);
@@ -29,7 +24,7 @@ final class Message implements ToArrayInterface
     private string $topic = '';
 
     private string $emote = '';
-    
+
     private string $filePath = '';
 
     private int $fileLine = 0;
@@ -66,7 +61,7 @@ final class Message implements ToArrayInterface
     {
         return $this->emote;
     }
-    
+
     public function filePath(): string
     {
         return $this->filePath;
@@ -125,7 +120,7 @@ final class Message implements ToArrayInterface
     {
         $new = clone $this;
         $new->writer = $writer;
-        
+
         return $new;
     }
 
@@ -133,7 +128,7 @@ final class Message implements ToArrayInterface
     {
         $new = clone $this;
         $new->vars = $vars;
-        
+
         return $new;
     }
 
@@ -154,7 +149,7 @@ final class Message implements ToArrayInterface
     {
         $this->handleDumpVars();
         $this->handleBacktrace();
-        
+
         return [
             'body' => $this->body,
             'file_path' => $this->filePath,

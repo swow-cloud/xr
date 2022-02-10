@@ -1,23 +1,22 @@
 <?php
-
-/*
- * This file is part of Chevere.
- *
- * (c) Rodolfo Berrios <rodolfo@chevere.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+/**
+ * This file is part of Swow-Cloud/Job
+ * @license  https://github.com/serendipity-swow/serendipity-job/blob/master/LICENSE
  */
 
 declare(strict_types=1);
 
 namespace Chevere\Xr\Tests\Chevere\Xr;
 
-use function Chevere\Filesystem\dirForPath;
 use Chevere\Xr\Client;
 use Chevere\Xr\Xr;
 use PHPUnit\Framework\TestCase;
+use function Chevere\Filesystem\dirForPath;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 final class XrTest extends TestCase
 {
     public function testConstructDefault(): void

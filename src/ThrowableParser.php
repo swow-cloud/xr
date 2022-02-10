@@ -1,12 +1,7 @@
 <?php
-
-/*
- * This file is part of Chevere.
- *
- * (c) Rodolfo Berrios <rodolfo@chevere.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+/**
+ * This file is part of Swow-Cloud/Job
+ * @license  https://github.com/serendipity-swow/serendipity-job/blob/master/LICENSE
  */
 
 declare(strict_types=1);
@@ -36,7 +31,7 @@ class ThrowableParser
 
     public const CLOSE_TEMPLATE = '</div>';
 
-    public const ITEM_TEMPLATE = <<<HTML
+    public const ITEM_TEMPLATE = <<<'HTML'
         <div class="throwable-item">
             <h2 class="throwable-title">%title%</h2>
             <div class="throwable-code">%code%</div>
@@ -103,19 +98,19 @@ class ThrowableParser
                     'function' => '{main}',
                     'file' => $read->file(),
                     'line' => $read->line(),
-                ]
+                ],
             ];
         }
         $traceDocument = new TraceDocument($trace, $this->documentFormat);
         $translate = [
-                '%title%' => $read->className(),
-                '%code%' => $read->code(),
-                '%message%' => $read->message(),
-                '%extra%' => $this->index === 1
-                    ? $this->extra
-                    : '',
-                '%trace%' => $traceDocument->__toString(),
-            ];
+            '%title%' => $read->className(),
+            '%code%' => $read->code(),
+            '%message%' => $read->message(),
+            '%extra%' => $this->index === 1
+                ? $this->extra
+                : '',
+            '%trace%' => $traceDocument->__toString(),
+        ];
         $this->appendBodyLine(strtr(static::ITEM_TEMPLATE, $translate));
 
         return $throwable->getPrevious();

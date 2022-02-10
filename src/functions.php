@@ -1,23 +1,18 @@
 <?php
-
-/*
- * This file is part of Chevere.
- *
- * (c) Rodolfo Berrios <rodolfo@chevere.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+/**
+ * This file is part of Swow-Cloud/Job
+ * @license  https://github.com/serendipity-swow/serendipity-job/blob/master/LICENSE
  */
 
 declare(strict_types=1);
 
 namespace Chevere\Xr {
-    use function Chevere\Filesystem\dirForPath;
     use Chevere\Writer\Interfaces\WriterInterface;
-    use function Chevere\Writer\streamTemp;
     use Chevere\Writer\StreamWriter;
     use LogicException;
     use Throwable;
+    use function Chevere\Filesystem\dirForPath;
+    use function Chevere\Writer\streamTemp;
 
     /**
      * @codeCoverageIgnore
@@ -51,7 +46,7 @@ namespace Chevere\Xr {
      * Register XR throwable handler.
      *
      * @param bool $callPrevious True to call the previous handler.
-     * False to disable the previous handler.
+     *                           False to disable the previous handler.
      *
      * @codeCoverageIgnore
      */
@@ -98,9 +93,9 @@ namespace Chevere\Xr {
 }
 
 namespace {
+    use Chevere\Xr\Message;
     use function Chevere\Xr\getWriter;
     use function Chevere\Xr\getXr;
-    use Chevere\Xr\Message;
 
 // @codeCoverageIgnoreStart
     if (!defined('XR_BACKTRACE')) {

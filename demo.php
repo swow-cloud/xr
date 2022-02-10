@@ -1,12 +1,7 @@
 <?php
-
-/*
- * This file is part of Chevere.
- *
- * (c) Rodolfo Berrios <rodolfo@chevere.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+/**
+ * This file is part of Swow-Cloud/Job
+ * @license  https://github.com/serendipity-swow/serendipity-job/blob/master/LICENSE
  */
 
 declare(strict_types=1);
@@ -27,7 +22,7 @@ sleep(2);
 xr(
     👉: [
         1 => 'chevere/xr is a debugger which',
-        2 => 'runs a PHP message server!'
+        2 => 'runs a PHP message server!',
     ],
     t: 'hello-world',
     e: '🐘'
@@ -46,7 +41,7 @@ xr(
     ✨: new class() {
         public array $ohhh = [
             'XR' => 'is another take on the server debug concept',
-            'built' => 'on top of ReactPHP.'
+            'built' => 'on top of ReactPHP.',
         ];
     },
     t: 'hello-world',
